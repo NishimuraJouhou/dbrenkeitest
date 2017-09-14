@@ -1,0 +1,96 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta http-equiv="Content-Security-Policy" content="default-src * data:; style-src * 'unsafe-inline'; script-src * 'unsafe-inline' 'unsafe-eval'">
+    <script src="components/loader.js"></script>
+    <link rel="stylesheet" href="components/loader.css">
+    <link rel="stylesheet" href="css/style.css">
+    
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>JavaScript SDK クイックスタート（ブラウザ版）</title>
+    
+    <!-- SDKの読み込み -->
+    <script type="text/javascript" src="components/ncmb.min.js" charset="utf-8"></script>
+    <script>
+        // mobile backendアプリとの連携
+        var ncmb = new NCMB("d308b9b651b0c45ea7cb9a61442270310272b91c7c5cfc4456a4e585e0ca50ed","da76fabb0e0e1706b1d6eebac3e420f0909755520409c547fb88f9a1e4ce007b");
+        
+        //――――――――――――――――――――
+        // データストアへの登録
+        //――――――――――――――――――――
+        /*
+        // クラスのTestClassを作成
+        var TestClass = ncmb.DataStore("TestClass");    //多分既存のテーブルと接続するためのオブジェクト取得
+        
+        var testClass = new TestClass();    //これがそのままテーブルになります
+
+        testClass.set("message", "Hello, NCMB!");   //これがレコードになります。第一引数がフィールド名、第二引数が値です。
+
+        testClass.save()
+                 .then(function(){
+                    // 保存に成功した場合の処理
+                    alert("DB接続成功！(｀･ω･´)");
+                  })
+                 .catch(function(err){
+                    // 保存に失敗した場合の処理
+                    alert("DB接続失敗…(´･ω･`)");
+                  });
+        */
+        
+        //――――――――――――――――――――
+        // データストアへの読み込み
+        //――――――――――――――――――――
+        /*
+        var test = ncmb.DataStore("test_mst");
+        test.equalTo("name", "hanako")  //フィールド名「name」で、値が「hanako」レコードを
+         .fetchAll()    //全部引っ張ってこい
+         .then(function(results){   //レコード取り出します
+            for (var i = 0; i < results.length; i++) {  //レコードがなくなるまでぐるぐる処理
+              var object = results[i];
+              document.getElementById("kakikae").innerHTML = object.nickname;
+            }
+          })
+         .catch(function(err){
+            document.getElementById("kakikae").innerHTML = "DB接続失敗…(´･ω･`)";
+          });
+        */
+
+        //――――――――――――――――――――
+        // データストアへの更新
+        //――――――――――――――――――――
+        var test = ncmb.DataStore("test_mst");
+        var testClass = new test();
+        testClass.set("name", "kabayaki");   //これがレコードになります。第一引数がフィールド名、第二引数が値です。
+        testClass.set("nickname", "kaba");   //これがレコードになります。第一引数がフィールド名、第二引数が値です。
+        testClass.save()
+                 .then(function(){
+                    // 保存に成功した場合の処理
+                    //alert("DB接続成功！(｀･ω･´)");
+                    document.getElementById("kakikae").innerHTML = "DB接続成功！(｀･ω･´)";
+                  })
+                 .catch(function(err){
+                    // 保存に失敗した場合の処理
+                    //alert("DB接続失敗…(´･ω･`)");
+                    document.getElementById("kakikae").innerHTML = "DB接続失敗…(´･ω･`)";
+                  });
+
+        //――――――――――――――――――――
+        // 使ってみての所感
+        //――――――――――――――――――――
+        /*
+            なんか、SQL使わないから、ピンとこないかな。ここでしか使えない技術になってしまいそうでなんか絶妙。
+            でもこれなら、簡単にネットワーク使ったアプリを作れるね。すごいねえ。
+            人気投票もおちゃのこさいさいじゃないの。
+        */
+
+ </script>
+</head>
+<body>
+	<br />
+    <div id="kakikae">
+        This is a template for Monaca app.
+    </div>
+</body>
+</html>
